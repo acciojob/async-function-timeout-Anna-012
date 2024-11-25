@@ -1,8 +1,8 @@
 //your JS code here. If required.
 document.getElementById('btn').addEventListener('click', async () => {
-  const textInput = document.getElementById('text').value;
-  const delayInput = parseInt(document.getElementById('delay').value, 10);
-  const outputDiv = document.getElementById('output');
+  const textInput = document.getElementById('text').value; // Get text input value
+  const delayInput = parseInt(document.getElementById('delay').value, 10); // Get delay value as a number
+  const outputDiv = document.getElementById('output'); // Output div to display result
 
   // Validate inputs
   if (!textInput.trim()) {
@@ -15,12 +15,12 @@ document.getElementById('btn').addEventListener('click', async () => {
     return;
   }
 
-  // Async function to delay execution
+  // Async delay function
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-  outputDiv.textContent = 'Waiting...';
+  outputDiv.textContent = 'Waiting...'; // Show waiting message
 
-  // Await delay and display text
+  // Wait for the specified delay and then update the output
   await delay(delayInput);
   outputDiv.textContent = textInput;
 });
