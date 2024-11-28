@@ -1,27 +1,37 @@
 //your JS code here. If required.
-document.getElementById('btn').addEventListener('click', async () => {
-  const textInput = document.getElementById('text').value; // Retrieve text input
-  const delayInput = parseInt(document.getElementById('delay').value, 10); // Retrieve and parse delay input
-  const outputDiv = document.getElementById('output'); // Reference to output div
+// Function to simulate a delay using a promise
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
-  // Validate text input
-  if (!textInput.trim()) {
-    outputDiv.textContent = 'Please enter some text.';
-    return;
-  }
+// Async function to handle the display logic
+async function handleDisplay() {
+    // Retrieve the values from the input fields
+    const textInput = document.getElementById('text').value;
+    const delayInput = document.getElementById('delay').value;
+    const outputDiv = document.getElementById('output');
+    
+    // Clear any existing content in the output div
+    outputDiv.textContent = '';
 
-  // Validate delay input
-  if (isNaN(delayInput) || delayInput < 0) {
-    outputDiv.textContent = 'Please enter a valid delay in milliseconds.';
-    return;
-  }
+    // Validate input
+    if (!textInput || !delayInput || delayInput <= 0) {
+        outputDiv.textContent = 'Please enter valid text and delay.';
+        return;
+    }
 
-  // Show waiting message
-  outputDiv.textContent = 'Waiting...';
+    // Display loading message during the delay
+    outputDiv.textContent = 'Loading...';
 
-  // Introduce delay
-  await new Promise((resolve) => setTimeout(resolve, delayInput));
+    // Introduce the specified delay
+    await delay(Number(delayInput));
 
-  // Update output after the delay
-  outputDiv.textContent = textInput;
+    // Display the user-provided text after the delay
+    outputDiv.textContent = textInput;
+}
+
+// Add an event listener to the button
+document.getElementById('btn').addEventListener('click', (event) => {
+    event.preventDefault(); // Prevent form submission
+    handleDisplay(); // Call the async function
 });
