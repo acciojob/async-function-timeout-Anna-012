@@ -16,9 +16,9 @@ async function handleDisplay(event) {
     outputDiv.textContent = 'Please enter valid text and delay.';
     return;
   }
-
-  outputDiv.textContent = 'Loading...'; // Loading message
+	
   await delay(delayInput); // Introduce delay
+  outputDiv.textContent = 'Loading...'; // Loading message
   outputDiv.textContent = textInput; // Update output
 }
 
